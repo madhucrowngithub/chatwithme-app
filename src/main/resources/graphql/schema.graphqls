@@ -1,0 +1,34 @@
+type User {
+  id: ID!
+  username: String!
+  status: String! # online/offline
+}
+
+type Room {
+    id: ID!
+    name: String!
+}
+
+type Message {
+  id: ID!
+  content: String!
+  sender: User!
+  timestamp: String!
+  room: Room!
+}
+
+type Query {
+  getUsers: [User!]!
+  getMessages(roomId: ID!): [Message!]!
+  getAllRooms: [Room!]!
+}
+
+type Mutation {
+  sendMessage(roomId: String!, senderId: String!, content: String!): Message!
+  createUser(username: String!, status: String!): User!
+  createRoom(name: String!): Room!
+}
+
+type Subscription {
+  messageSent(roomId: ID!): Message!
+}
